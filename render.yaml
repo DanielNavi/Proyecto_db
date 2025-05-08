@@ -9,4 +9,5 @@ services:
       - key: FLASK_ENV
         value: production
       - key: DATABASE_URL
-        value: mysql://root:UShYqZPcenAHzdvHcpcMoBOuuHPztGHF@ballast.proxy.rlwy.net:29681/railway
+        value: mysql+pymysql://root:UShYqZPcenAHzdvHcpcMoBOuuHPztGHF@ballast.proxy.rlwy.net:29681/railway
+
