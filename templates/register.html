@@ -1,0 +1,34 @@
+{% extends 'base_form.html' %}
+{% block title %}Registro{% endblock %}
+
+{% block content %}
+<div class="login-register-container">
+    <div class="color-bar"></div>
+    <form method="POST" action="{{ url_for('register') }}">
+        <h2>Crear una cuenta</h2>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flash-messages">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <label for="nombre">Nombre completo:</label>
+        <input type="text" name="nombre" required>
+
+        <label for="correo">Correo electrónico:</label>
+        <input type="email" name="correo" required>
+
+        <label for="contraseña">Contraseña:</label>
+        <input type="password" name="contraseña" required>
+
+        <button type="submit">Registrarse</button>
+
+        <p style="margin-top: 1rem;">¿Ya tienes cuenta? <a href="{{ url_for('login') }}">Inicia sesión</a></p>
+    </form>
+</div>
+{% endblock %}

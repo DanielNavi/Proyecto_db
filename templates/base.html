@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Mi Aplicación NBA{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="layout">
+        {% if session.get('user_id') %}
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <img src="https://i5.walmartimages.com/seo/Wilson-NBA-Forge-Indoor-Outdoor-Basketball-Brown-29-5-in_1c2ef0c8-a9d1-4ef4-b648-dd13094a5c6e.c5d507afbd97057ec7b137a771812bcb.png" alt="Logo NBA" class="sidebar-logo">
+                    <p class="user-greeting">Hola, {{ session.get('user_name') }}</p>
+                </div>
+                <nav class="menu">
+                    <a href="{{ url_for('index') }}">🏀 Consultas</a>
+                    <a href="{{ url_for('logout') }}">🚪 Cerrar sesión</a>
+                </nav>
+            </aside>
+        {% endif %}
+
+        <main class="main-content">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Consultas de Jugadores NBA{% endblock %}
+
+{% block content %}
+<div class="main-container">
+    
+
+    <h2 class="page-title">Consulta de jugadores NBA</h2>
+
+    <div class="card consulta-card">
+        <form method="GET" action="{{ url_for('index') }}">
+            <label for="consulta">Selecciona una consulta:</label>
+            <select name="consulta" id="consulta">
+                {% for key in consultas %}
+                    <option value="{{ key }}" {% if key == consulta_seleccionada %}selected{% endif %}>{{ key }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Ejecutar</button>
+        </form>
+    </div>
+
+    {% if resultados %}
+        <div class="card table-card">
+            <table>
+                <thead>
+                    <tr>
+                        {% for col in resultados[0].keys() %}
+                            <th>{{ col }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for fila in resultados %}
+                        <tr>
+                            {% for valor in fila.values() %}
+                                <td>{{ valor }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="pagination">
+                {% if pagina > 1 %}
+                    <a href="{{ url_for('index') }}?pagina={{ pagina - 1 }}&consulta={{ consulta_seleccionada }}">← Anterior</a>
+                {% endif %}
+                <span>Página {{ pagina }}</span>
+                <a href="{{ url_for('index') }}?pagina={{ pagina + 1 }}&consulta={{ consulta_seleccionada }}">Siguiente →</a>
+            </div>
+        </div>
+    {% else %}
+        <p class="no-result">No hay resultados para mostrar.</p>
+    {% endif %}
+</div>
+{% endblock %}

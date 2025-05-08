@@ -1,0 +1,33 @@
+{% extends 'base_form.html' %}
+{% block title %}Iniciar sesión{% endblock %}
+
+{% block content %}
+<div class="login-form-container">
+    <div class="color-bar">
+        
+    </div>
+    <form method="POST" action="{{ url_for('login') }}">
+        <h2>Iniciar sesión</h2>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flash-messages">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <label for="correo">Correo electrónico:</label>
+        <input type="email" name="correo" required>
+
+        <label for="contraseña">Contraseña:</label>
+        <input type="password" name="contraseña" required>
+
+        <button type="submit">Ingresar</button>
+
+        <p style="margin-top: 1rem;">¿No tienes cuenta? <a href="{{ url_for('register') }}">Regístrate aquí</a></p>
+    </form>
+</div>
+{% endblock %}
